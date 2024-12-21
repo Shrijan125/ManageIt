@@ -1,14 +1,29 @@
-import mongoose,{Schema} from 'mongoose';
-import { CheckpointSchema } from './checkpoints.model';
+import mongoose, { Schema } from 'mongoose';
+import { ProjectInterface } from '@/lib/types';
 
-const ProjectSchema = new Schema({
-    projectId: { type: String, required: true },
-    candidateId: { type: String, required: true },
+const ProjectSchema = new Schema<ProjectInterface>(
+  {
     title: { type: String, required: true },
     description: { type: String, required: true },
     dueDate: { type: Date, required: true },
     totalMarks: { type: Number, required: true },
-    checkpoints: [CheckpointSchema],
-});
+    checkpoints: {
+      type: [
+        {
+          title: { type: String, required: true },
+          description: { type: String, required: true },
+          dueDate: { type: Date, required: true },
+          marks: { type: Number, required: true },
+          completed: { type: Boolean, default: false },
+        },
+      ],
+      required: true,
+    },
+  },
+  {
+    timestamps: true,
+  },
+);
 
-export const Project = mongoose.models.Project || mongoose.model('Project', ProjectSchema);
+export const Project =
+  mongoose.models.Project || mongoose.model('Project', ProjectSchema);
