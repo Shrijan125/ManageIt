@@ -16,35 +16,39 @@ interface StepperProps {
   yourProjects: boolean;
 }
 
-export const Stepper: React.FC<StepperProps> = ({ checkpoints: initialCheckpoints, yourProjects, projectId }) => {
+export const Stepper: React.FC<StepperProps> = ({
+  checkpoints: initialCheckpoints,
+  yourProjects,
+  projectId,
+}) => {
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
-  
+
   const [checkpoints, setCheckpoints] = useState(initialCheckpoints);
 
   async function handleCheckpoint(checkpointId: string) {
     setLoading(true);
-    
-    const checkpoint = checkpoints.find(c => c._id === checkpointId);
+
+    const checkpoint = checkpoints.find((c) => c._id === checkpointId);
     if (!checkpoint) return;
-    
+
     const newStatus = !checkpoint.completed;
 
     try {
-      await axios.post(process.env.NEXT_PUBLIC_NEXTBASE_URL + '/markcheckpoint', {
-        projectId: projectId,
-        checkpointId: checkpointId,
-        completed: newStatus
-      });
-
-      setCheckpoints(prevCheckpoints =>
-        prevCheckpoints.map(cp =>
-          cp._id === checkpointId
-            ? { ...cp, completed: newStatus }
-            : cp
-        )
+      await axios.post(
+        process.env.NEXT_PUBLIC_NEXTBASE_URL + '/markcheckpoint',
+        {
+          projectId: projectId,
+          checkpointId: checkpointId,
+          completed: newStatus,
+        },
       );
-      
+
+      setCheckpoints((prevCheckpoints) =>
+        prevCheckpoints.map((cp) =>
+          cp._id === checkpointId ? { ...cp, completed: newStatus } : cp,
+        ),
+      );
     } catch (error) {
       if (axios.isAxiosError(error) && error.response?.data?.message) {
         toast({
@@ -67,7 +71,9 @@ export const Stepper: React.FC<StepperProps> = ({ checkpoints: initialCheckpoint
         <li
           key={index}
           className={`flex w-full ${
-            index === checkpoints.length - 1 ? 'after:w-0' : 'after:w-full after:border-4'
+            index === checkpoints.length - 1
+              ? 'after:w-0'
+              : 'after:w-full after:border-4'
           } items-center after:content-[''] after:h-1 after:border-b after:inline-block ${
             item.completed ? 'after:border-primaryBg' : 'after:border-gray-700'
           }`}

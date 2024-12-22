@@ -7,7 +7,9 @@ export async function GET() {
   try {
     await connectToDB();
 
-    const user = await User.findOne({ email: 'test@gmail.com' }).populate('projects');
+    const user = await User.findOne({ email: 'test@gmail.com' }).populate(
+      'projects',
+    );
 
     if (!user) {
       return NextResponse.json({ message: 'User not found' }, { status: 404 });

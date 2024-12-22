@@ -8,16 +8,22 @@ export async function POST(request: Request) {
     const project = await Project.findOneAndUpdate(
       { _id: projectId, 'checkpoints._id': checkpointId },
       { $set: { 'checkpoints.$.completed': completed } },
-      { new: true }
+      { new: true },
     );
 
     if (!project) {
-      return NextResponse.json({ error: 'Project or checkpoint not found' }, { status: 404 });
+      return NextResponse.json(
+        { error: 'Project or checkpoint not found' },
+        { status: 404 },
+      );
     }
 
     return NextResponse.json(project);
   } catch (error) {
     console.error('Error in mark-checkpoint API:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 },
+    );
   }
 }

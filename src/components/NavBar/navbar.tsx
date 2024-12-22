@@ -23,7 +23,6 @@ const NavBar = () => {
     { title: 'Contact', link: '#' },
   ];
 
-  
   return (
     <div className="">
       <nav className="flex items-center justify-between mt-5 mx-7">
@@ -36,7 +35,9 @@ const NavBar = () => {
               src={NoteFlowImage}
             ></Image>
           </div>
-          <h1 className="sm:text-2xl text-lg font-bold text-purple-200">ManageIt</h1>
+          <h1 className="sm:text-2xl text-lg font-bold text-purple-200">
+            ManageIt
+          </h1>
         </div>
         <ul className="gap-5 flex items-center">
           {items.map((item, index) => {
@@ -51,7 +52,7 @@ const NavBar = () => {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger>
-                <Avatar className='sm:size-12 size-8'>
+                <Avatar className="sm:size-12 size-8">
                   <AvatarImage src="https://github.com/shadcn.png" />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>

@@ -11,7 +11,7 @@ const UserPage = () => {
   const [data, setData] = useState<ProjectWithId[]>([]);
   useEffect(() => {
     axios
-      .get(process.env.NEXT_PUBLIC_NEXTBASE_URL+'/getOtherProjects')
+      .get(process.env.NEXT_PUBLIC_NEXTBASE_URL + '/getOtherProjects')
       .then((response) => {
         const data = response.data;
         setData(data);

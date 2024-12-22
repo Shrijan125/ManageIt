@@ -61,19 +61,25 @@ const CardComponent: React.FC<ProjectWithId> = ({
         <p className="font-bold mt-2">
           Total Marks: <span className="font-medium">{totalMarks}</span>{' '}
         </p>
-        { showAcceptButton &&
+        {showAcceptButton && (
           <>
-          <p className="font-bold mt-2">
-          CheckPoints completed: <span className="font-medium">{totalMarks}</span>{' '}
-          </p>
-          <p className="font-bold mt-2">
-          CheckPoints remaining: <span className="font-medium">{totalMarks}</span>{' '}
-          </p>
+            <p className="font-bold mt-2">
+              CheckPoints completed:{' '}
+              <span className="font-medium">{totalMarks}</span>{' '}
+            </p>
+            <p className="font-bold mt-2">
+              CheckPoints remaining:{' '}
+              <span className="font-medium">{totalMarks}</span>{' '}
+            </p>
           </>
-        }
+        )}
       </CardContent>
       <CardFooter className="flex flex-col gap-5 items-start w-full">
-        <Stepper projectId={_id} yourProjects={showAcceptButton} checkpoints={checkpoints}></Stepper>
+        <Stepper
+          projectId={_id}
+          yourProjects={showAcceptButton}
+          checkpoints={checkpoints}
+        ></Stepper>
         {!showAcceptButton && (
           <Button onClick={handleClick}>
             {!loading ? 'Accept' : <Loader />}
