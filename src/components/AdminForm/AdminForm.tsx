@@ -63,7 +63,6 @@ const AdminForm = () => {
         router.back();
         return;
       }
-      console.log(result.data);
       const message = result.data.message || 'Failed to add project';
       if (result.status === 400) {
         toast({ description: message, variant: 'destructive' });

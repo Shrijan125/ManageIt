@@ -1,4 +1,3 @@
-export const BASE_URL = 'http://localhost:3000/api';
 import img1 from '../../public/img1.jpg';
 import img2 from '../../public/img2.jpg';
 import img3 from '../../public/img3.jpeg';

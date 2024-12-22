@@ -3,7 +3,6 @@ import CardComponent from '@/components/Card/card-component';
 import NavBar from '@/components/NavBar/navbar';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { BASE_URL } from '@/lib/constants';
 import { useToast } from '@/hooks/use-toast';
 import { ProjectWithId } from '@/lib/types';
 
@@ -13,7 +12,7 @@ const UserPage = () => {
 
   useEffect(() => {
     axios
-      .get(BASE_URL + '/getUserProjects')
+      .get(process.env.NEXT_PUBLIC_NEXTBASE_URL + '/getUserProjects')
       .then((response) => {
         const data = response.data;
         setData(data);

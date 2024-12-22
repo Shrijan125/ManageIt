@@ -3,17 +3,15 @@ import CardComponent from '@/components/Card/card-component';
 import NavBar from '@/components/NavBar/navbar';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { BASE_URL } from '@/lib/constants';
 import { useToast } from '@/hooks/use-toast';
 import { ProjectWithId } from '@/lib/types';
 
 const UserPage = () => {
   const { toast } = useToast();
   const [data, setData] = useState<ProjectWithId[]>([]);
-
   useEffect(() => {
     axios
-      .get(BASE_URL + '/getOtherProjects')
+      .get(process.env.NEXT_PUBLIC_NEXTBASE_URL+'/getOtherProjects')
       .then((response) => {
         const data = response.data;
         setData(data);

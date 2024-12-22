@@ -23,8 +23,13 @@ export interface UserInterface {
 
 export interface ProjectWithId extends ProjectInterface {
   _id: string;
+  checkpoints: CheckpointWithId[];
 }
 
 export interface ProjectId {
+  _id: string;
+}
+
+export interface CheckpointWithId extends CheckpointInterface {
   _id: string;
 }
