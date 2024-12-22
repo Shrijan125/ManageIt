@@ -40,13 +40,13 @@ const CardComponent: React.FC<ProjectWithId> = ({
     }
   };
   return (
-    <Card className="w-[400px] h-[500px] overflow-hidden select-none">
+    <Card className="sm:w-[400px] w-[300px] h-[500px]  overflow-hidden select-none">
       <CardHeader className="relative h-[45%]">
         <Image src={randomImage} alt="img1" fill />
       </CardHeader>
       <CardContent className="mt-2 text-purple-100">
-        <h1 className="text-xl font-semibold">{title}</h1>
-        <p>{description}</p>
+        <h1 className="sm:text-xl text-lg font-semibold">{title}</h1>
+        <p className='sm:text-sm text-xs mt-2'>{description}</p>
         <p className="font-bold mt-2">
           Due Date:{' '}
           <span className="font-medium">{date.toLocaleDateString()}</span>{' '}

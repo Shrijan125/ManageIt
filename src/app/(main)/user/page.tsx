@@ -26,7 +26,7 @@ const UserPage = () => {
   return (
     <>
       <NavBar />
-      <div className="mt-8 mx-8 grid grid-cols-4 gap-5 place-items-center">
+      <div className="mt-8 mx-8 grid grid-cols-1  xl:grid-cols-3 2xl:grid-cols-4 gap-5 place-items-center">
         {data.map((project, index) => (
           <CardComponent
             key={index}

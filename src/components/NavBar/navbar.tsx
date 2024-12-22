@@ -22,6 +22,8 @@ const NavBar = () => {
     { title: 'Your Projects', link: 'yourprojects' },
     { title: 'Contact', link: '#' },
   ];
+
+  
   return (
     <div className="">
       <nav className="flex items-center justify-between mt-5 mx-7">
@@ -36,7 +38,7 @@ const NavBar = () => {
           </div>
           <h1 className="sm:text-2xl text-lg font-bold text-purple-200">ManageIt</h1>
         </div>
-        <ul className="gap-5 items-center">
+        <ul className="gap-5 flex items-center">
           {items.map((item, index) => {
             return (
               <Link href={`/${item.link}`} key={index}>
@@ -49,7 +51,7 @@ const NavBar = () => {
           <TooltipProvider>
             <Tooltip>
               <TooltipTrigger>
-                <Avatar>
+                <Avatar className='sm:size-12 size-8'>
                   <AvatarImage src="https://github.com/shadcn.png" />
                   <AvatarFallback>CN</AvatarFallback>
                 </Avatar>

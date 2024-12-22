@@ -58,7 +58,7 @@ const SignIn = () => {
     }
   };
   return (
-    <Card className="w-[400px] h-[500px] mx-auto my-20">
+    <Card className="sm:w-[400px] sm:h-[500px] mx-auto sm:my-20 my-10 w-[300px]">
       <CardHeader>
         <CardTitle className="flex items-center justify-center gap-4">
           <div className="relative w-14 h-14">

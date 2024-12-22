@@ -13,7 +13,7 @@ const AdminPage = () => {
   return (
     <div>
       <NavBar></NavBar>
-      <Card className="mt-5 w-[50%] mx-auto">
+      <Card className="mt-5 w-[95%] sm:w-[50%] mx-auto sm:mb-0 mb-5">
         <CardHeader>
           <CardTitle className="text-purple-200">Add Project</CardTitle>
           <CardDescription>
