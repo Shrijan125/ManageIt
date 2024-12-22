@@ -16,12 +16,14 @@ import { Label } from '@/components/ui/label';
 import { signIn } from 'next-auth/react';
 import { useToast } from '@/hooks/use-toast';
 import Loader from '@/components/Loader/loader';
+import { useRouter } from 'next/navigation';
 
 const SignIn = () => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState('');
   const { toast } = useToast();
   const [password, setPassword] = useState('');
+  const router = useRouter();
   const handleClick = async () => {
     setLoading(true);
     if (!email || !password) {
@@ -34,15 +36,16 @@ const SignIn = () => {
     }
     try {
       const result = await signIn('credentials', {
-        username: email,
+        email: email,
         password: password,
-      },
-    );
-      if (result?.status===401) {
+        redirect: false,
+      });
+      if (result?.status === 401) {
         toast({ description: 'Invalid credentials.', variant: 'destructive' });
         setLoading(false);
         return;
       }
+      router.replace('/user');
     } catch (error) {
       if (error instanceof Error) {
         toast({ description: error.message, variant: 'destructive' });
@@ -50,8 +53,7 @@ const SignIn = () => {
         toast({ description: 'An error occurred.', variant: 'destructive' });
       }
       setLoading(false);
-    }
-    finally{
+    } finally {
       setLoading(false);
     }
   };
@@ -69,11 +71,21 @@ const SignIn = () => {
       </CardHeader>
       <CardContent className="flex gap-5 flex-col">
         <Label htmlFor="email">Email</Label>
-        <Input value={email} onChange={(e)=>{setEmail(e.target.value)}} name="email" id="email" placeholder="test@gmail.com"></Input>
+        <Input
+          value={email}
+          onChange={(e) => {
+            setEmail(e.target.value);
+          }}
+          name="email"
+          id="email"
+          placeholder="test@gmail.com"
+        ></Input>
         <Label htmlFor="password">Password</Label>
         <Input
-        value={password}
-          onChange={(e)=>{setPassword(e.target.value)}}
+          value={password}
+          onChange={(e) => {
+            setPassword(e.target.value);
+          }}
           name="password"
           type="password"
           id="password"
@@ -82,7 +94,7 @@ const SignIn = () => {
       </CardContent>
       <CardFooter>
         <Button onClick={handleClick} className="w-full mt-5">
-          {loading ? <Loader/> : 'Sign In'}
+          {loading ? <Loader /> : 'Sign In'}
         </Button>
       </CardFooter>
     </Card>

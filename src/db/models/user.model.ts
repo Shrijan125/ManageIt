@@ -15,9 +15,8 @@ const userSchema = new Schema<UserInterface>({
     {
       type: Types.ObjectId,
       ref: 'Project',
-    }
+    },
   ],
-
 });
 
-export const User = mongoose.models.User ||  mongoose.model('User', userSchema);
+export const User = mongoose.models.User || mongoose.model('User', userSchema);

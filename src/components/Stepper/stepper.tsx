@@ -10,8 +10,7 @@ interface StepperProps {
   checkpoints: CheckpointInterface[];
 }
 
-export const Stepper : React.FC<StepperProps> = ({checkpoints}) => {
-
+export const Stepper: React.FC<StepperProps> = ({ checkpoints }) => {
   return (
     <ol className="flex items-center w-full">
       {checkpoints.map((item, index) => {

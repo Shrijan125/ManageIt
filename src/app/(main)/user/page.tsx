@@ -5,15 +5,15 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { BASE_URL } from '@/lib/constants';
 import { useToast } from '@/hooks/use-toast';
-import { ProjectInterface } from '@/lib/types';
+import { ProjectWithId } from '@/lib/types';
 
 const UserPage = () => {
   const { toast } = useToast();
-  const [data, setData] = useState<ProjectInterface[]>([]);
+  const [data, setData] = useState<ProjectWithId[]>([]);
 
   useEffect(() => {
     axios
-      .get(BASE_URL + '/getProjects')
+      .get(BASE_URL + '/getOtherProjects')
       .then((response) => {
         const data = response.data;
         setData(data);
@@ -30,6 +30,7 @@ const UserPage = () => {
         {data.map((project, index) => (
           <CardComponent
             key={index}
+            _id={project._id}
             checkpoints={project.checkpoints}
             description={project.description}
             dueDate={project.dueDate}

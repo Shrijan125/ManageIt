@@ -13,16 +13,20 @@ import { Button } from '../ui/button';
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 
-const NavBar =() => {
-  const handleClick = async()=>{
+const NavBar = () => {
+  const handleClick = async () => {
     await signOut();
-  }
-  const items = [{title:'Home',link:'user'}, {title:'Your Projects',link:'yourprojects'}, {title:'Contact',link:'#'}];
+  };
+  const items = [
+    { title: 'Home', link: 'user' },
+    { title: 'Your Projects', link: 'yourprojects' },
+    { title: 'Contact', link: '#' },
+  ];
   return (
     <div className="">
       <nav className="flex items-center justify-between mt-5 mx-7">
         <div className="flex flex-row gap-4 items-center">
-          <div className="relative h-[50px] w-[50px]">
+          <div className="relative h-[30px] w-[30px] sm:h-[50px] sm:w-[50px]">
             <Image
               alt="project-logo"
               className="object-cover"
@@ -30,17 +34,15 @@ const NavBar =() => {
               src={NoteFlowImage}
             ></Image>
           </div>
-          <h1 className="text-2xl font-bold text-purple-200">ManageIt</h1>
+          <h1 className="sm:text-2xl text-lg font-bold text-purple-200">ManageIt</h1>
         </div>
-        <ul className="flex gap-5 items-center">
+        <ul className="gap-5 items-center">
           {items.map((item, index) => {
             return (
               <Link href={`/${item.link}`} key={index}>
-              <li
-                className="select-none cursor-pointer text-lg hover:text-purple-300"
-              >
-                {item.title}
-              </li>
+                <li className="select-none sm:block hidden cursor-pointer text-lg hover:text-purple-300">
+                  {item.title}
+                </li>
               </Link>
             );
           })}
@@ -55,12 +57,13 @@ const NavBar =() => {
               <TooltipContent className="hover:cursor-pointer">
                 <div className="flex flex-col gap-4 p-4">
                   <h1 className="text-xl text-purple-200">Welcome!</h1>
-                  <Button variant={'destructive'} onClick={handleClick}>Sign Out</Button>
+                  <Button variant={'destructive'} onClick={handleClick}>
+                    Sign Out
+                  </Button>
                 </div>
               </TooltipContent>
             </Tooltip>
           </TooltipProvider>
-
         </ul>
       </nav>
     </div>

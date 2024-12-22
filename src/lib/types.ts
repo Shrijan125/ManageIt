@@ -20,3 +20,11 @@ export interface UserInterface {
   password: string;
   projects: Types.ObjectId[];
 }
+
+export interface ProjectWithId extends ProjectInterface {
+  _id: string;
+}
+
+export interface ProjectId {
+  _id: string;
+}

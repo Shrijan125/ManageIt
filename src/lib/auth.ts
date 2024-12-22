@@ -7,7 +7,7 @@ export const authOptions = {
     CredentialsProvider({
       name: 'Credentials',
       credentials: {
-        username: { label: 'Email', type: 'text', placeholder: 'Email' },
+        email: { label: 'Email', type: 'text', placeholder: 'Email' },
         password: {
           label: 'Password',
           type: 'password',
@@ -15,24 +15,25 @@ export const authOptions = {
         },
       },
       async authorize(
-        credentials: { username: string; password: string } | undefined,
+        credentials: { email: string; password: string } | undefined,
       ) {
         if (!credentials) return null;
         try {
           await connectToDB();
           const user = await User.findOne({
-            email: credentials?.username,
-          }).select('password');
+            email: credentials?.email,
+          }).select('password email name');
 
           if (!user) {
             return null;
           }
-        const isPasswordValid = credentials.password === user.password;
+
+          const isPasswordValid = credentials.password === user.password;
           if (!isPasswordValid) {
             console.log('Invalid email or password');
             return null;
           }
-          return user;
+          return { id: user._id, email: user.email, name: user.name };
         } catch (error) {
           console.log(error);
           return null;

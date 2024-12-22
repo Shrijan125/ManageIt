@@ -17,16 +17,13 @@ export async function POST(req: NextRequest) {
   try {
     await connectToDB();
     const body = (await req.json()) as ProjectInterface;
-
     const { title, description, dueDate, totalMarks, checkpoints } = body;
-
     if (!title || !description || !dueDate || !totalMarks || !checkpoints) {
       return NextResponse.json(
         { message: 'Missing required fields' },
         { status: 400 },
       );
     }
-
     if (!Array.isArray(checkpoints) || checkpoints.length === 0) {
       return NextResponse.json(
         { message: 'Checkpoints cannot be empty or invalid' },
@@ -47,7 +44,6 @@ export async function POST(req: NextRequest) {
       (sum, checkpoint) => sum + checkpoint.marks,
       0,
     );
-
     if (totalCheckpointMarks !== totalMarks) {
       return NextResponse.json(
         {
@@ -57,7 +53,6 @@ export async function POST(req: NextRequest) {
         { status: 400 },
       );
     }
-
     const projectDueDate = new Date(dueDate);
     const lastCheckpointDueDate = checkpoints
       .map((checkpoint) => new Date(checkpoint.dueDate))
